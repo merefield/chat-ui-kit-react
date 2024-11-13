@@ -1,5 +1,5 @@
 {
-  "name": "@chatscope/chat-ui-kit-react",
+  "name": "chat-ui-kit-react",
   "version": "2.0.3",
   "description": "React component library for creating chat interfaces",
   "license": "MIT",
@@ -70,6 +70,7 @@
     "typescript": "^4.5.4"
   },
   "scripts": {
+    "prepare": "yarn build",
     "build:clean": "rm -Rf dist",
     "build:umd": "rollup -c",
     "build:cjs": "BABEL_ENV=cjs babel src/components -d dist/cjs",
