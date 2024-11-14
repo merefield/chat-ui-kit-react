@@ -45,7 +45,7 @@ export default [
       }),
       terser({
         compress: {
-          ecma: 2021, // Ensures Terser knows you're using modern syntax.
+          ecma: 2022, // Ensures Terser knows you're using modern syntax.
         }
       }),
     ],
