@@ -71,6 +71,7 @@
   },
   "scripts": {
     "prepare": "yarn build",
+    "postinstall": "cd ./node_modules/chat-ui-kit-react && yarn install && yarn run build",
     "build:clean": "rm -Rf dist",
     "build:umd": "rollup -c",
     "build:cjs": "BABEL_ENV=cjs babel src/components -d dist/cjs",
