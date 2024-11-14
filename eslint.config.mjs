@@ -41,7 +41,7 @@ export default [{
         },
 
         parser: tsParser,
-        ecmaVersion: 6,
+        ecmaVersion: 13,
         sourceType: "module",
 
         parserOptions: {
