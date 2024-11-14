@@ -127,6 +127,8 @@ export class ContentEditable extends Component {
         onInput={handleInput}
         onKeyPress={handleKeyPress}
         dangerouslySetInnerHTML={innerHTML()}
+        role="textbox" // Add role here
+        tabIndex={0} // Ensure the div is focusable
       ></div>
     );
   }

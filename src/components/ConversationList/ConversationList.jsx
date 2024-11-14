@@ -20,8 +20,8 @@ export const ConversationList = ({
   const cName = `${prefix}-conversation-list`;
 
   // Memoize, to avoid re-render each time when props (children) changed
-  const Tag = useMemo(
-    () => ({ children }) => {
+  const Tag = useMemo(() => {
+    const TagComponent = ({ children }) => {
       // PerfectScrollbar for now cant be disabled, so render div instead of disabling it
       // https://github.com/goldenyz/react-perfect-scrollbar/issues/107
       if (scrollable === false || (scrollable === true && loading === true)) {
@@ -45,9 +45,13 @@ export const ConversationList = ({
           </PerfectScrollbar>
         );
       }
-    },
-    [scrollable, loading]
-  );
+    };
+
+    // Assign displayName for debugging
+    TagComponent.displayName = "TagComponent";
+
+    return TagComponent;
+  }, [scrollable, loading, onYReachEnd]);
 
   return (
     <div className={classNames(cName, className)} {...props}>

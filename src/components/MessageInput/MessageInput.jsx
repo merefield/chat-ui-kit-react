@@ -45,6 +45,21 @@ function editorContainer() {
     }
   }
 
+  Container.propTypes = {
+    fancyScroll: PropTypes.bool,
+    children: PropTypes.node,
+    forwardedRef: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({ current: PropTypes.instanceOf(Element) })
+    ])
+  };
+
+  Container.defaultProps = {
+    fancyScroll: true,
+    children: null,
+    forwardedRef: null
+  };
+
   return React.forwardRef((props, ref) => {
     return <Container forwardedRef={ref} {...props} />;
   });
@@ -111,7 +126,7 @@ function MessageInputInner(
     if (autoFocus === true) {
       focus();
     }
-  }, []);
+  }, [autoFocus]);
 
   // Update scroll
   useEffect(() => {

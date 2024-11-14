@@ -38,12 +38,22 @@ export const ExpansionPanel = ({
         onChange?.(!opened, e);
       }
     },
-    [onChange, open, opened, isOpened]
+    [onChange, opened, isOpened]
   );
 
   return (
     <div {...rest} className={classNames(cName, openModifier, className)}>
-      <div className={`${cName}__header`} onClick={handleOpen}>
+      <div
+        className={`${cName}__header`}
+        onClick={handleOpen}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            handleOpen(e);
+          }
+        }}
+        tabIndex={0}
+        role="button"
+      >
         <div className={`${cName}__title`}>{title}</div>
         <div className={`${cName}__icon`}>
           <FontAwesomeIcon icon={icon} />

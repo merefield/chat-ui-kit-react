@@ -20,7 +20,6 @@ Object.freeze(handlerNameByEvent);
 export default class ScrollBar extends Component {
   constructor(props) {
     super(props);
-    this.handleRef = this.handleRef.bind(this);
     this._handlerByEvent = {};
   }
 
@@ -52,10 +51,8 @@ export default class ScrollBar extends Component {
   }
 
   componentWillUnmount() {
-    // unhook up evens
     Object.keys(this._handlerByEvent).forEach((key) => {
       const value = this._handlerByEvent[key];
-
       if (value) {
         this._container.removeEventListener(key, value, false);
       }
@@ -66,7 +63,6 @@ export default class ScrollBar extends Component {
   }
 
   _updateEventHook(prevProps = {}) {
-    // hook up events
     Object.keys(handlerNameByEvent).forEach((key) => {
       const callback = this.props[handlerNameByEvent[key]];
       const prevCallback = prevProps[handlerNameByEvent[key]];
@@ -109,30 +105,15 @@ export default class ScrollBar extends Component {
     }
   }
 
-  handleRef(ref) {
+  handleRef = (ref) => {
     this._container = ref;
     this.props.containerRef?.(ref);
-  }
+  };
 
   render() {
     const {
-      className,
       style,
-      option,
-      options,
-      containerRef,
-      onScrollY,
-      onScrollX,
-      onScrollUp,
-      onScrollDown,
-      onScrollLeft,
-      onScrollRight,
-      onYReachStart,
-      onYReachEnd,
-      onXReachStart,
-      onXReachEnd,
       component,
-      onSync,
       children,
       ...remainProps
     } = this.props;

@@ -14,11 +14,10 @@ function StatusListInner(
 
   const listRef = useRef();
 
-  // Return object with public Api
+  // Return object with public API
   useImperativeHandle(ref, () => ({
     focus: (idx) => {
       const items = Array.from(listRef.current.querySelectorAll("li"));
-      // For sure filter only direct children because querySelectorAll cant get only direct children
       const directChild = items.filter(
         (item) => item.parentNode === listRef.current
       );
@@ -36,7 +35,6 @@ function StatusListInner(
       className={classNames(cName, className, { [`${cName}--${size}`]: size })}
     >
       {React.Children.map(children, (item) => {
-        // If active argument is set, clear active flag for all elements except desired
         const newProps = {};
         if (selected) {
           newProps.selected = item.props.status === selected;
@@ -51,15 +49,9 @@ function StatusListInner(
           };
         }
 
-        const onKeyPress = (evt) => {
-          if (onChange) {
-            if (
-              evt.key === "Enter" &&
-              evt.shiftKey === false &&
-              evt.altKey === false
-            ) {
-              onChange(item.props.status);
-            }
+        const handleKeyPress = (evt) => {
+          if (evt.key === "Enter") {
+            onChange(item.props.status);
           }
         };
 
@@ -76,7 +68,12 @@ function StatusListInner(
         })();
 
         return (
-          <li tabIndex={tIndex} onKeyPress={onKeyPress}>
+          <li
+            role="button"               // Add role for accessibility
+            tabIndex={tIndex || 0}      // Make focusable
+            onKeyPress={handleKeyPress} // Handle Enter key for keyboard accessibility
+            onClick={newProps.onClick}  // Assign the onClick handler for mouse interactions
+          >
             {React.cloneElement(item, newProps)}
           </li>
         );
@@ -89,27 +86,11 @@ const StatusList = forwardRef(StatusListInner);
 StatusList.displayName = "StatusList";
 
 StatusList.propTypes = {
-  /**
-   * Primary content.
-   * Allowed components:
-   *
-   * * &lt;Status /&gt;
-   */
   children: allowedChildren([Status]),
-
-  /** Selected element */
   selected: PropTypes.oneOf(StatusEnum),
-
-  /** Size */
   size: PropTypes.oneOf(SizeEnum),
-
-  /** tabindex value for items. Any positive integer will be treated as start index for counting. Zero and negative values will be applied to all items */
   itemsTabIndex: PropTypes.number,
-
-  /** Additional classes. */
   className: PropTypes.string,
-
-  /** onChange handler */
   onChange: PropTypes.func,
 };
 
