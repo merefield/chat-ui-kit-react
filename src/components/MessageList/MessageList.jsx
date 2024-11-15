@@ -11,6 +11,12 @@ import MessageGroup from "../MessageGroup";
 import MessageSeparator from "../MessageSeparator";
 import MessageListContent from "./MessageListContent";
 
+// Add this in your component file
+require('react-dom');
+window.React2 = require('react');
+console.log("let's check if react is duplicated - false here means it might be!")
+console.log(window.React1 === window.React2);
+
 class MessageListInner extends React.Component {
   constructor(props) {
     super(props);
