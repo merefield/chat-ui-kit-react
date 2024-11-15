@@ -35,3 +35,7 @@ export { default as AttachmentButton } from "./Buttons/AttachmentButton";
 
 // Enums
 export { default as Enums } from "./enums";
+
+// check for react duplication
+
+export { default as ReactFromModule } from "react";
