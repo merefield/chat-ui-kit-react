@@ -122,21 +122,31 @@ export default class ScrollBar extends Component {
       style,
       component,
       children,
-      onYReachStart,
-      onYReachEnd,
-      onSync,
-      containerRef,
       ...remainProps
     } = this.props;
-    debugger;
 
     const Comp = typeof component === "undefined" ? "div" : component;
 
-    return (
-      <Comp style={style} ref={this.handleRef} {...remainProps}>
-        {children}
-      </Comp>
-    );
+    if (Comp === "div") {
+      const {
+        onYReachStart,
+        onYReachEnd,
+        onSync,
+        containerRef,
+        ...remainingProps
+      } = remainProps;
+
+      return (
+        <Comp style={style} ref={this.handleRef} {...remainingProps}>
+          {children}
+        </Comp>
+      )} else {
+      return (
+        <Comp style={style} ref={this.handleRef} {...remainProps}>
+          {children}
+        </Comp>
+      );
+      }
   }
 }
 
