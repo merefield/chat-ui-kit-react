@@ -19,7 +19,14 @@ Object.freeze(handlerNameByEvent);
 
 export default class ScrollBar extends Component {
   constructor(props) {
-    super(props);
+    const {
+      onYReachStart,
+      onYReachEnd,
+      onSync,
+      ...remainingProps
+    } = props;
+
+    super(remainingProps);
     this._handlerByEvent = {};
   }
 
