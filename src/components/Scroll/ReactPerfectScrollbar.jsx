@@ -19,14 +19,14 @@ Object.freeze(handlerNameByEvent);
 
 export default class ScrollBar extends Component {
   constructor(props) {
-    const {
-      onYReachStart,
-      onYReachEnd,
-      onSync,
-      ...remainingProps
-    } = props;
+    // const {
+    //   onYReachStart,
+    //   onYReachEnd,
+    //   onSync,
+    //   ...remainingProps
+    // } = props;
 
-    super(remainingProps);
+    super(props);
     this._handlerByEvent = {};
   }
 
@@ -122,8 +122,13 @@ export default class ScrollBar extends Component {
       style,
       component,
       children,
+      onYReachStart,
+      onYReachEnd,
+      onSync,
+      containerRef,
       ...remainProps
     } = this.props;
+    debugger;
 
     const Comp = typeof component === "undefined" ? "div" : component;
 
