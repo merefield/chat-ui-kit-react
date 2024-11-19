@@ -19,14 +19,8 @@ Object.freeze(handlerNameByEvent);
 
 export default class ScrollBar extends Component {
   constructor(props) {
-    // const {
-    //   onYReachStart,
-    //   onYReachEnd,
-    //   onSync,
-    //   ...remainingProps
-    // } = props;
-
     super(props);
+    this.handleRef = this.handleRef.bind(this);
     this._handlerByEvent = {};
   }
 
@@ -58,8 +52,10 @@ export default class ScrollBar extends Component {
   }
 
   componentWillUnmount() {
+    // unhook up evens
     Object.keys(this._handlerByEvent).forEach((key) => {
       const value = this._handlerByEvent[key];
+
       if (value) {
         this._container.removeEventListener(key, value, false);
       }
@@ -70,6 +66,7 @@ export default class ScrollBar extends Component {
   }
 
   _updateEventHook(prevProps = {}) {
+    // hook up events
     Object.keys(handlerNameByEvent).forEach((key) => {
       const callback = this.props[handlerNameByEvent[key]];
       const prevCallback = prevProps[handlerNameByEvent[key]];
@@ -119,34 +116,37 @@ export default class ScrollBar extends Component {
 
   render() {
     const {
+	  // This is basically just removing a whole load of unneeded props
+      /* eslint-disable @typescript-eslint/no-unused-vars */
+      className,
       style,
+      option,
+      options,
+      containerRef,
+      onScrollY,
+      onScrollX,
+      onScrollUp,
+      onScrollDown,
+      onScrollLeft,
+      onScrollRight,
+      onYReachStart,
+      onYReachEnd,
+      onXReachStart,
+      onXReachEnd,
       component,
+      onSync,
       children,
+	  /* eslint-enable @typescript-eslint/no-unused-vars */
       ...remainProps
     } = this.props;
 
     const Comp = typeof component === "undefined" ? "div" : component;
 
-    if (Comp === "div") {
-      const {
-        onYReachStart,
-        onYReachEnd,
-        onSync,
-        containerRef,
-        ...remainingProps
-      } = remainProps;
-
-      return (
-        <Comp style={style} ref={this.handleRef} {...remainingProps}>
-          {children}
-        </Comp>
-      )} else {
-      return (
-        <Comp style={style} ref={this.handleRef} {...remainProps}>
-          {children}
-        </Comp>
-      );
-    }
+    return (
+      <Comp style={style} ref={this.handleRef} {...remainProps}>
+        {children}
+      </Comp>
+    );
   }
 }
 
@@ -157,10 +157,10 @@ ScrollBar.propTypes = {
   option: PropTypes.object,
   options: PropTypes.object,
   containerRef: PropTypes.oneOfType([
-  // Either a function
-  PropTypes.func, 
-  // Or the instance of a DOM native element (see the note about SSR)
-  PropTypes.shape({ current: PropTypes.instanceOf(Element) })
+	// Either a function
+	PropTypes.func,
+	// Or the instance of a DOM native element (see the note about SSR)
+	PropTypes.shape({ current: PropTypes.instanceOf(Element) })
   ]),
   onScrollY: PropTypes.func,
   onScrollX: PropTypes.func,
