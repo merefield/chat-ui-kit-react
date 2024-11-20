@@ -878,11 +878,6 @@
     "@babel/helper-string-parser" "^7.25.9"
     "@babel/helper-validator-identifier" "^7.25.9"
 
-"@chatscope/chat-ui-kit-styles@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@chatscope/chat-ui-kit-styles/-/chat-ui-kit-styles-1.4.0.tgz#17ded0439d306f7cd2a81f40a2ef197a6ce6bb7b"
-  integrity sha512-016mBJD3DESw7Nh+lkKcPd22xG92ghA0VpIXIbjQtmXhC7Ve6wRazTy8z1Ahut+Tbv179+JxrftuMngsj/yV8Q==
-
 "@colors/colors@1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.5.0.tgz#bb504579c1cae923e6576a4f5da43d25f97bdbd9"
@@ -2480,6 +2475,10 @@ char-regex@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/char-regex/-/char-regex-1.0.2.tgz#d744358226217f981ed58f479b1d6bcc29545dcf"
   integrity sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==
+
+"chat-ui-kit-styles@github:merefield/chat-ui-kit-styles":
+  version "1.4.0"
+  resolved "https://codeload.github.com/merefield/chat-ui-kit-styles/tar.gz/13ea1a3d3e2831592222f34fbff6ac8a0e139ccf"
 
 chokidar-cli@3.0.0:
   version "3.0.0"
